@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        header img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .address-section,
+        .price-details {
+            margin-bottom: 20px;
+        }
+
+        .address-section p,
+        .price-details p {
+            margin: 5px 0;
+        }
+
+        .product-details {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .product-details img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .price {
+            color: green;
+            font-weight: bold;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: red;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #f0c14b;
+            border: 1px solid #a88734;
+            color: #111;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #ddb347;
+        }
+    </style>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <header>
+        <img src="https://i.imghippo.com/files/aHmS2025EaY.png" alt="Header Logo">
+    </header>
+    <div class="container">
+        <h1>Order Summary</h1>
+        <div class="address-section">
+            <p><b>Deliver to:</b></p>
+            <p>Address: <span id="address">Loading...</span></p>
+            <p>Contact Number: <span id="contact">Loading...</span></p>
+        </div>
+        <div class="product-details">
+            <img src="https://i.imghippo.com/files/ohWY9987jE.jpg" alt="LG Washing Machine">
+            <div class="product-info">
+                <p><b>LG Washing Machine</b></p>
+                <p class="original-price">₹74,900.00</p>
+                <p class="price">₹1599.00</p>
+            </div>
+        </div>
+        <div class="price-details">
+            <p><b>Price Details:</b></p>
+            <p>Price (1 item): ₹74,900.00</p>
+            <p>Discount: ₹74,401.00</p>
+            <p>Delivery Charges: Free</p>
+            <p><b>Total Amount: ₹1599.00</b></p>
+        </div>
+        <button id="pay-btn">Continue</button>
+    </div>
+    <script>
+        // Fetch address details from the backend
+        fetch('/get-address')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('address').innerText = data.address || "N/A";
+                document.getElementById('contact').innerText = data.contact || "N/A";
+            });
+
+        // Razorpay payment integration
+        document.getElementById('pay-btn').addEventListener('click', function () {
+            var options = {
+                "key": "rzp_live_elxzEEFkwxBLHR", // Razorpay live API key
+                "amount": 159900, // Amount in paise (₹1599.00)
+                "currency": "INR",
+                "name": "Your Store Name",
+                "description": "Order Payment",
+                "image": "https://i.imghippo.com/files/aHmS2025EaY.png",
+                "handler": function (response) {
+                    alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+                    // Redirecting to the success page after payment
+                    window.location.href = "/success-page";  // Replace with your success page URL
+                },
+                "prefill": {
+                    "name": "John Doe", // Replace with user's name
+                    "email": "johndoe@example.com", // Replace with user's email
+                    "contact": "1234567890" // Replace with user's contact
+                },
+                "theme": {
+                    "color": "#f0c14b"
+                }
+            };
+
+            var rzp = new Razorpay(options);
+            rzp.open();
+        });
+    </script>
+</body>
+</html>

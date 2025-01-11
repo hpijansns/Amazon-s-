@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Menu Example</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .slider {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            width: 500%;
+            transition: transform 1s ease-in-out;
+        }
+
+        .slider img {
+            width: 20%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-container, .new-product-container, 
+        .bottom-product-container, .extra-bottom-container, 
+        .final-bottom-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .product-box, .new-product-box, .bottom-product-box, 
+        .extra-bottom-box, .final-bottom-box {
+            width: 48%;
+            height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .product-box img, .new-product-box img, 
+        .bottom-product-box img, .extra-bottom-box img, 
+        .final-bottom-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <img src="https://i.imghippo.com/files/JC8974zT.png" alt="Header Image">
+    </div>
+
+    <!-- Slider Section -->
+    <div class="slider">
+        <div class="slider-wrapper" id="sliderWrapper">
+            <img src="https://i.imghippo.com/files/yEl9723tQ.jpg" alt="Slider Image 1">
+            <img src="https://i.imghippo.com/files/ScIK2545RU.jpg" alt="Slider Image 2">
+            <img src="https://i.imghippo.com/files/apPw8191lzI.jpg" alt="Slider Image 3">
+            <img src="https://i.imghippo.com/files/AX8014rgY.jpg" alt="Slider Image 4">
+            <img src="https://i.imghippo.com/files/dWHp6099ncg.jpg" alt="Slider Image 5">
+        </div>
+    </div>
+
+    <!-- Product Containers -->
+    <div class="product-container">
+        <div class="product-box">
+            <a href="iPhone 15 Pro max.html">
+                <img src="https://i.imghippo.com/files/oZPV3759VJM.jpg" alt="Product 1">
+            </a>
+        </div>
+        <div class="product-box">
+            <a href="iPhone16.html">
+                <img src="https://i.imghippo.com/files/ny1243XZ.jpg" alt="Product 2">
+            </a>
+        </div>
+    </div>
+
+    <div class="new-product-container">
+        <div class="new-product-box">
+            <a href="iPhone 16 plus.html">
+                <img src="https://i.imghippo.com/files/NqNL9626veU.jpg" alt="New Product 1">
+            </a>
+        </div>
+        <div class="new-product-box">
+            <a href="Samsung galaxy.html">
+                <img src="https://i.imghippo.com/files/DluY8051Ok.jpg" alt="New Product 2">
+            </a>
+        </div>
+    </div>
+
+    <div class="bottom-product-container">
+        <div class="bottom-product-box">
+            <a href="iPhone 13.html">
+                <img src="https://i.imghippo.com/files/IrxD8776ivA.jpg" alt="Bottom Product 1">
+            </a>
+        </div>
+        <div class="bottom-product-box">
+            <a href="iPhone 16 pro max.html">
+                <img src="https://i.imghippo.com/files/wsKe2013biA.jpg" alt="Bottom Product 2">
+            </a>
+        </div>
+    </div>
+
+    <div class="extra-bottom-container">
+        <div class="extra-bottom-box">
+            <a href="LG washing machine.html">
+                <img src="https://i.imghippo.com/files/ECCZ2576Ts.jpg" alt="Extra Bottom Product 1">
+            </a>
+        </div>
+        <div class="extra-bottom-box">
+            <a href="Hp 15.html">
+                <img src="https://i.imghippo.com/files/gjy9111EVA.jpg" alt="Extra Bottom Product 2">
+            </a>
+        </div>
+    </div>
+
+    <div class="final-bottom-container">
+        <div class="final-bottom-box">
+            <a href="iPhone 15 Pro max.html">
+                <img src="https://i.imghippo.com/files/adQ5555whY.jpg" alt="Final Bottom Product 1">
+            </a>
+        </div>
+        <div class="final-bottom-box">
+            <a href="iPhone 15 Pro max.html">
+                <img src="https://i.imghippo.com/files/IL9417USU.jpg" alt="Final Bottom Product 2">
+            </a>
+        </div>
+    </div>
+
+    <!-- Slider JavaScript -->
+    <script>
+        let currentIndex = 0;
+        const sliderWrapper = document.getElementById('sliderWrapper');
+        const totalSlides = sliderWrapper.children.length;
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            sliderWrapper.style.transform = `translateX(-${currentIndex * 100 / totalSlides}%)`;
+        }, 3000); // Change slide every 3 seconds
+    </script>
+
+</body>
+</html>
